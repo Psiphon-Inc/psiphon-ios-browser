@@ -1,0 +1,11 @@
+language: objective-c
+
+branches:
+  only:
+    - master
+
+xcode_project: Psiphon-Browser.xcodeproj
+osx_image: xcode8
+
+script:
+  - xcodebuild clean build -project Psiphon-Browser.xcodeproj
