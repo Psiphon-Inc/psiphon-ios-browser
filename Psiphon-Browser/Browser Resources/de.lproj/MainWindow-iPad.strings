@@ -1,0 +1,15 @@
+
+/* Class = "IBUIButton"; accessibilityLabel = "Stop"; ObjectID = "123"; */
+"123.accessibilityLabel" = "Stop";
+
+/* Class = "IBUIButton"; normalTitle = "X"; ObjectID = "123"; */
+"123.normalTitle" = "X";
+
+/* Class = "IBUIButton"; accessibilityLabel = "Refresh"; ObjectID = "126"; */
+"126.accessibilityLabel" = "Refresh";
+
+/* Class = "IBUITextField"; accessibilityLabel = "Address or search field"; ObjectID = "jsC-vq-hdU"; */
+"jsC-vq-hdU.accessibilityLabel" = "Address or search field";
+
+/* Class = "IBUITextField"; placeholder = "Search or enter address"; ObjectID = "jsC-vq-hdU"; */
+"jsC-vq-hdU.placeholder" = "Adresse oder Suchbegriff eingeben";

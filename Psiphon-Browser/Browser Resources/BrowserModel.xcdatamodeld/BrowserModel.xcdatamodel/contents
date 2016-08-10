@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3400" systemVersion="13A3017" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Bookmark" representedClassName="NSManagedObject" syncable="YES">
+        <attribute name="name" attributeType="String" minValueString="1" maxValueString="255" defaultValueString="folder" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" minValueString="0" maxValueString="2083" regularExpressionString="(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;amp;:/~\+#]*[\w\-\@?^=%&amp;amp;/~\+#])?" syncable="YES"/>
+        <relationship name="Folder" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="Bookmarks" inverseEntity="Folder" indexed="YES" syncable="YES"/>
+    </entity>
+    <entity name="Folder" representedClassName="NSManagedObject" syncable="YES">
+        <attribute name="name" attributeType="String" minValueString="1" maxValueString="255" defaultValueString="folder" syncable="YES"/>
+        <relationship name="Bookmarks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Bookmark" inverseName="Folder" inverseEntity="Bookmark" indexed="YES" syncable="YES"/>
+        <relationship name="Parent" optional="YES" minCount="1" maxCount="1" deletionRule="No Action" destinationEntity="Folder" indexed="YES" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Bookmark" positionX="1978" positionY="-279" width="128" height="88"/>
+        <element name="Folder" positionX="2203" positionY="-430" width="128" height="88"/>
+    </elements>
+</model>

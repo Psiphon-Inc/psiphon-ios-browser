@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11185.3" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gNV-eV-EHg">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11151.4"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Log View Controller-->
+        <scene sceneID="QW5-b3-7tD">
+            <objects>
+                <viewController storyboardIdentifier="LogViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gNV-eV-EHg" customClass="LogViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bUP-2i-ihD"/>
+                        <viewControllerLayoutGuide type="bottom" id="iGq-LM-eoh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WCX-qA-qL6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uQr-Ad-PtE">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="gNV-eV-EHg" id="Fzd-jA-PAT"/>
+                                    <outlet property="delegate" destination="gNV-eV-EHg" id="NDr-FH-4ml"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logging" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGS-x3-HIx">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="YdS-k3-4UX">
+                                <segments>
+                                    <segment title="Open Browser"/>
+                                    <segment title="Feedback"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentedControlButtonPressed:" destination="gNV-eV-EHg" eventType="valueChanged" id="D2o-GG-9Oa"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="uQr-Ad-PtE" firstAttribute="centerX" secondItem="AGS-x3-HIx" secondAttribute="centerX" id="3FM-8d-aED"/>
+                            <constraint firstItem="uQr-Ad-PtE" firstAttribute="top" secondItem="AGS-x3-HIx" secondAttribute="bottom" constant="13" id="8RZ-TE-zuj"/>
+                            <constraint firstItem="uQr-Ad-PtE" firstAttribute="leading" secondItem="WCX-qA-qL6" secondAttribute="leadingMargin" id="Eeh-IB-EJ0"/>
+                            <constraint firstItem="YdS-k3-4UX" firstAttribute="centerX" secondItem="WCX-qA-qL6" secondAttribute="centerX" id="Ka0-3Q-sei"/>
+                            <constraint firstItem="uQr-Ad-PtE" firstAttribute="top" secondItem="WCX-qA-qL6" secondAttribute="top" constant="57" id="gsa-c9-mUS"/>
+                            <constraint firstAttribute="bottom" secondItem="YdS-k3-4UX" secondAttribute="bottom" constant="20" symbolic="YES" id="m3T-ju-t2H"/>
+                            <constraint firstItem="iGq-LM-eoh" firstAttribute="top" secondItem="uQr-Ad-PtE" secondAttribute="bottom" constant="66" id="qjc-FY-o7d"/>
+                            <constraint firstItem="uQr-Ad-PtE" firstAttribute="trailing" secondItem="WCX-qA-qL6" secondAttribute="trailingMargin" id="zeB-1Y-kZB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="loggingTableView" destination="uQr-Ad-PtE" id="JZk-Pw-c8I"/>
+                        <outlet property="segmentedControl" destination="YdS-k3-4UX" id="G7t-60-4rW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Khm-xs-gN8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="216.80000000000001" y="8.5457271364317844"/>
+        </scene>
+        <!--Feedback View Controller-->
+        <scene sceneID="fJy-mu-gI7">
+            <objects>
+                <viewController storyboardIdentifier="FeedbackViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fPD-fu-75R" customClass="FeedbackViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lNe-Z5-yyl"/>
+                        <viewControllerLayoutGuide type="bottom" id="uo1-kZ-R4Q"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qUO-ut-Q3R">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7E4-uL-OYH">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nZ7-GP-9ZA">
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="fPD-fu-75R" eventType="touchUpInside" id="Bbx-Dw-QkY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7E4-uL-OYH" firstAttribute="top" secondItem="lNe-Z5-yyl" secondAttribute="bottom" constant="8" symbolic="YES" id="9Tc-LA-0Hx"/>
+                            <constraint firstItem="nZ7-GP-9ZA" firstAttribute="centerX" secondItem="7E4-uL-OYH" secondAttribute="centerX" id="IST-9S-QNJ"/>
+                            <constraint firstItem="nZ7-GP-9ZA" firstAttribute="centerX" secondItem="qUO-ut-Q3R" secondAttribute="centerX" id="jUj-aX-SzA"/>
+                            <constraint firstAttribute="bottom" secondItem="nZ7-GP-9ZA" secondAttribute="bottom" constant="20" symbolic="YES" id="sGC-pU-zmj"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hq6-WY-IaZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="921" y="9"/>
+        </scene>
+    </scenes>
+</document>
