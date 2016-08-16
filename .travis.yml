@@ -1,0 +1,17 @@
+language: objective-c
+branches:
+  only:
+  - master
+xcode_project: Psiphon-Browser.xcodeproj
+osx_image: xcode8
+before_script:
+- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/profile/iOS_Team_Provisioning_Profile_compsiphonbrowser.mobileprovision.enc -d -a -out scripts/profile/iOS_Team_Provisioning_Profile_compsiphonbrowser.mobileprovision
+- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.cer.enc -d -a -out scripts/certs/dist.cer
+- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.p12.enc -d -a -out scripts/certs/dist.p12
+- ./scripts/add-key.sh
+script:
+- xcodebuild clean build -project Psiphon-Browser.xcodeproj
+env:
+  global:
+  - APP_NAME="Psiphon-Browser"
+  - PROFILE_NAME="iOS_Team_Provisioning_Profile_compsiphonbrowser"
