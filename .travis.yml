@@ -8,4 +8,4 @@ xcode_project: Psiphon-Browser.xcodeproj
 osx_image: xcode8
 
 script:
-  - xcodebuild clean build -project Psiphon-Browser.xcodeproj CODE_SIGNING_REQUIRED=NO PROVISIONING_PROFILE_REQUIRED=NO
+  - xcodebuild clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
