@@ -34,7 +34,7 @@
     
     // Do any additional setup after loading the view, typically from a nib
     
-    self.tunnelController = [TunnelController sharedInstance];
+    self.tunnelController = [PsiphonTunnelController sharedInstance];
     self.tunnelController.tunneledAppProtocolDelegate = self;
     [self.tunnelController startTunnel];
     

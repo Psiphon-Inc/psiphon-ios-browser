@@ -19,7 +19,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "TunnelController.h"
+#import <PsiphonTunnelController/PsiphonTunnelController.h>
 #import "JiveAuthenticatingHTTPProtocol/JAHPAuthenticatingHTTPProtocol.h"
 #import "LogViewController.h"
 
@@ -32,7 +32,7 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-@property (strong, nonatomic)  TunnelController *tunnelController;
+@property (strong, nonatomic)  PsiphonTunnelController *tunnelController;
 @property (strong, nonatomic)  NSString *homePage;
 
 

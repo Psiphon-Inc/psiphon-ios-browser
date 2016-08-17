@@ -1,5 +1,0 @@
-framework module "Psi" {
-    header "Psi.h"
-
-    export *
-}
