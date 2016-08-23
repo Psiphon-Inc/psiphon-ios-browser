@@ -46,7 +46,7 @@
  */
 
 #import "JAHPQNSURLSessionDemux.h"
-#import "../TunnelController.h"
+#import <PsiphonTunnelController/PsiphonTunnelController.h>
 
 @interface JAHPQNSURLSessionDemuxTaskInfo : NSObject
 
@@ -136,7 +136,7 @@
         
         
         NSString* proxyHost = @"localhost";
-        TunnelController * tunnelController = [TunnelController sharedInstance];
+        PsiphonTunnelController * tunnelController = [PsiphonTunnelController sharedInstance];
         NSNumber* proxyPort = [NSNumber numberWithInt: [tunnelController listeningSocksProxyPort]];
         
         // Create an NSURLSessionConfiguration that uses the proxy
