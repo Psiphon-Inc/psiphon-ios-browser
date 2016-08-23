@@ -224,12 +224,19 @@
     
     //specify DataStoreDirectory path
     mutableCopy[@"DataStoreDirectory"] = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    mutableCopy[@"RemoteServerListDownloadFilename"] = [mutableCopy[@"DataStoreDirectory"] stringByAppendingPathComponent:@"remote_server_list"];
+    
+    [[NSFileManager defaultManager] createFileAtPath:mutableCopy[@"RemoteServerListDownloadFilename"]
+                                            contents:nil
+                                          attributes:nil];
     
     //add DeviceRegion
     mutableCopy[@"DeviceRegion"] = [self getDeviceRegion];
     
     //set indistinguishable TLS flag and add TrustedRootCA file path
-    NSString *bundledTrustedCAPath = [[[ NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"rootCAs.txt"];
+    NSString * frameworkBundlePath = [[NSBundle bundleForClass:[PsiphonTunnelController class]] resourcePath];
+    NSString *bundledTrustedCAPath = [frameworkBundlePath stringByAppendingPathComponent:@"rootCAs.txt"];
+    
     if(![fileManager fileExistsAtPath:bundledTrustedCAPath]) {
         NSLog(@"Trusted CAs file not found. Aborting now.");
         abort();
@@ -237,15 +244,13 @@
     
     mutableCopy[@"UseIndistinguishableTLS"] = @YES;
     mutableCopy[@"TrustedCACertificatesFilename"] = bundledTrustedCAPath;
-
-    
     
     
     jsonData = [NSJSONSerialization dataWithJSONObject:mutableCopy
                                                options:0 // non-pretty printing
                                                  error:&e];
     if(e) {
-        NSLog(@"Failed to create JSON data from confoig object. Aborting now.");
+        NSLog(@"Failed to create JSON data from config object. Aborting now.");
         abort();
     }
     return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
