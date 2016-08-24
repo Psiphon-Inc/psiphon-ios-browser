@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		443FE8F21D6E1B290086DC29 /* psiphon_config.json.stub in Resources */ = {isa = PBXBuildFile; fileRef = 443FE8F11D6E1B290086DC29 /* psiphon_config.json.stub */; };
 		447615EF1C73ABA50015077B /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 447615EE1C73ABA50015077B /* LogViewController.m */; };
 		449BE2041C57D402006FDC28 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449BE2031C57D402006FDC28 /* CoreData.framework */; };
 		449BE2061C57D40C006FDC28 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449BE2051C57D40C006FDC28 /* SystemConfiguration.framework */; };
@@ -60,7 +61,6 @@
 		44B0A2101C568BD20064D364 /* Psiphon_Browser.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44B0A20E1C568BD20064D364 /* Psiphon_Browser.xcdatamodeld */; };
 		44B0A2121C568BD20064D364 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44B0A2111C568BD20064D364 /* Assets.xcassets */; };
 		44B0A2151C568BD20064D364 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44B0A2131C568BD20064D364 /* LaunchScreen.storyboard */; };
-		44CC93DB1D6CCAA20082F743 /* psiphon_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 44CC93DA1D6CCAA20082F743 /* psiphon_config.json */; };
 		44CC93E11D6CD85A0082F743 /* PsiphonTunnelController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44980AD81D63ACA600B78274 /* PsiphonTunnelController.framework */; };
 		44CC93E21D6CD8720082F743 /* PsiphonTunnelController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44980AD81D63ACA600B78274 /* PsiphonTunnelController.framework */; };
 		44CC93E31D6CD8720082F743 /* PsiphonTunnelController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44980AD81D63ACA600B78274 /* PsiphonTunnelController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -86,6 +86,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		443FE8F11D6E1B290086DC29 /* psiphon_config.json.stub */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = psiphon_config.json.stub; sourceTree = "<group>"; };
 		447615ED1C73ABA50015077B /* LogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
 		447615EE1C73ABA50015077B /* LogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
 		44980AD81D63ACA600B78274 /* PsiphonTunnelController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PsiphonTunnelController.framework; sourceTree = SOURCE_ROOT; };
@@ -161,7 +162,6 @@
 		44B0A2111C568BD20064D364 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		44B0A2141C568BD20064D364 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		44B0A2161C568BD20064D364 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		44CC93DA1D6CCAA20082F743 /* psiphon_config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = psiphon_config.json; sourceTree = "<group>"; };
 		44F143C01C763B2D00386142 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = SOURCE_ROOT; };
 		44F143C11C763B2D00386142 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = SOURCE_ROOT; };
 		44F556191C6D01040038D33A /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -192,7 +192,7 @@
 		447615E91C73906B0015077B /* Bundled */ = {
 			isa = PBXGroup;
 			children = (
-				44CC93DA1D6CCAA20082F743 /* psiphon_config.json */,
+				443FE8F11D6E1B290086DC29 /* psiphon_config.json.stub */,
 			);
 			name = Bundled;
 			sourceTree = "<group>";
@@ -421,6 +421,7 @@
 			files = (
 				449BE2981C57D84F006FDC28 /* right.png in Resources */,
 				44B0A2151C568BD20064D364 /* LaunchScreen.storyboard in Resources */,
+				443FE8F21D6E1B290086DC29 /* psiphon_config.json.stub in Resources */,
 				449BE2881C57D84F006FDC28 /* BookmarksForm.xib in Resources */,
 				449BE2901C57D84F006FDC28 /* delete_circle.png in Resources */,
 				449BE29B1C57D84F006FDC28 /* import_bookmark_howto.html in Resources */,
@@ -436,7 +437,6 @@
 				449BE29F1C57D84F006FDC28 /* unable_to_connect.html in Resources */,
 				449BE2961C57D84F006FDC28 /* magglass.png in Resources */,
 				449BE2911C57D84F006FDC28 /* folder.png in Resources */,
-				44CC93DB1D6CCAA20082F743 /* psiphon_config.json in Resources */,
 				449BE28E1C57D84F006FDC28 /* cell_arrow.png in Resources */,
 				449BE29D1C57D84F006FDC28 /* launch.html in Resources */,
 				449BE2831C57D84F006FDC28 /* Bookmarks.xib in Resources */,
