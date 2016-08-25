@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		443FE8F21D6E1B290086DC29 /* psiphon_config.json.stub in Resources */ = {isa = PBXBuildFile; fileRef = 443FE8F11D6E1B290086DC29 /* psiphon_config.json.stub */; };
+		443FE8F51D6F770B0086DC29 /* psiphon_config in Resources */ = {isa = PBXBuildFile; fileRef = 443FE8F41D6F770B0086DC29 /* psiphon_config */; };
 		447615EF1C73ABA50015077B /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 447615EE1C73ABA50015077B /* LogViewController.m */; };
 		449BE2041C57D402006FDC28 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449BE2031C57D402006FDC28 /* CoreData.framework */; };
 		449BE2061C57D40C006FDC28 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449BE2051C57D40C006FDC28 /* SystemConfiguration.framework */; };
@@ -86,7 +86,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		443FE8F11D6E1B290086DC29 /* psiphon_config.json.stub */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = psiphon_config.json.stub; sourceTree = "<group>"; };
+		443FE8F41D6F770B0086DC29 /* psiphon_config */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = psiphon_config; sourceTree = "<group>"; };
 		447615ED1C73ABA50015077B /* LogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
 		447615EE1C73ABA50015077B /* LogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
 		44980AD81D63ACA600B78274 /* PsiphonTunnelController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PsiphonTunnelController.framework; sourceTree = SOURCE_ROOT; };
@@ -192,7 +192,7 @@
 		447615E91C73906B0015077B /* Bundled */ = {
 			isa = PBXGroup;
 			children = (
-				443FE8F11D6E1B290086DC29 /* psiphon_config.json.stub */,
+				443FE8F41D6F770B0086DC29 /* psiphon_config */,
 			);
 			name = Bundled;
 			sourceTree = "<group>";
@@ -421,9 +421,9 @@
 			files = (
 				449BE2981C57D84F006FDC28 /* right.png in Resources */,
 				44B0A2151C568BD20064D364 /* LaunchScreen.storyboard in Resources */,
-				443FE8F21D6E1B290086DC29 /* psiphon_config.json.stub in Resources */,
 				449BE2881C57D84F006FDC28 /* BookmarksForm.xib in Resources */,
 				449BE2901C57D84F006FDC28 /* delete_circle.png in Resources */,
+				443FE8F51D6F770B0086DC29 /* psiphon_config in Resources */,
 				449BE29B1C57D84F006FDC28 /* import_bookmark_howto.html in Resources */,
 				449BE2931C57D84F006FDC28 /* gsearch.png in Resources */,
 				449BE28B1C57D84F006FDC28 /* MainWindow-iPad.strings in Resources */,

@@ -204,7 +204,7 @@
 
 - (NSString *) getPsiphonConfig {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *bundledConfigPath = [[[ NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"psiphon_config.json"];
+    NSString *bundledConfigPath = [[[ NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"psiphon_config"];
     if(![fileManager fileExistsAtPath:bundledConfigPath]) {
         NSLog(@"Config file not found. Aborting now.");
         abort();
