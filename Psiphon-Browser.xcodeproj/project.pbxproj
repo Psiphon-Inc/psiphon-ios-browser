@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		443FE8F21D6E1B290086DC29 /* psiphon_config.json.stub in Resources */ = {isa = PBXBuildFile; fileRef = 443FE8F11D6E1B290086DC29 /* psiphon_config.json.stub */; };
-		447615EF1C73ABA50015077B /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 447615EE1C73ABA50015077B /* LogViewController.m */; };
 		449BE2041C57D402006FDC28 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449BE2031C57D402006FDC28 /* CoreData.framework */; };
 		449BE2061C57D40C006FDC28 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449BE2051C57D40C006FDC28 /* SystemConfiguration.framework */; };
 		449BE2081C57D41E006FDC28 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 449BE2071C57D41E006FDC28 /* libxml2.2.tbd */; };
@@ -61,14 +60,22 @@
 		44B0A2101C568BD20064D364 /* Psiphon_Browser.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44B0A20E1C568BD20064D364 /* Psiphon_Browser.xcdatamodeld */; };
 		44B0A2121C568BD20064D364 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44B0A2111C568BD20064D364 /* Assets.xcassets */; };
 		44B0A2151C568BD20064D364 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44B0A2131C568BD20064D364 /* LaunchScreen.storyboard */; };
-		44CC93E11D6CD85A0082F743 /* PsiphonTunnelController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44980AD81D63ACA600B78274 /* PsiphonTunnelController.framework */; };
 		44CC93E21D6CD8720082F743 /* PsiphonTunnelController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44980AD81D63ACA600B78274 /* PsiphonTunnelController.framework */; };
 		44CC93E31D6CD8720082F743 /* PsiphonTunnelController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44980AD81D63ACA600B78274 /* PsiphonTunnelController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44F143C21C763B2D00386142 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F143C01C763B2D00386142 /* libcrypto.a */; };
 		44F143C31C763B2D00386142 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F143C11C763B2D00386142 /* libssl.a */; };
 		44F5561A1C6D01040038D33A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F556191C6D01040038D33A /* CoreTelephony.framework */; };
+		4E34EA261D6F48EE00367FCE /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E34EA251D6F48EE00367FCE /* LogViewController.swift */; };
+		4E4ABF591D6F833B004BF29F /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4ABF581D6F833B004BF29F /* FeedbackViewController.swift */; };
+		4E6795DF1D6DF36F007A6972 /* ResultMonad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6795DE1D6DF36F007A6972 /* ResultMonad.swift */; };
 		4E6BA42C1D5B85A40027EDC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E6BA42B1D5B85A40027EDC8 /* Main.storyboard */; };
-		4E6BA42F1D5B85EB0027EDC8 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E6BA42E1D5B85EB0027EDC8 /* FeedbackViewController.m */; };
+		4EBDCA141D70AF5300E7A516 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBDCA131D70AF5300E7A516 /* Constants.swift */; };
+		4EBDCA161D75E39E00E7A516 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBDCA151D75E39E00E7A516 /* Common.swift */; };
+		4ECCF99E1D5BA51900CCFB1B /* psiphon_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 4ECCF99D1D5BA51900CCFB1B /* psiphon_config.json */; };
+		4ECCF9A01D5BA7F900CCFB1B /* feedback.html in Resources */ = {isa = PBXBuildFile; fileRef = 4ECCF99F1D5BA7F900CCFB1B /* feedback.html */; };
+		4ECCF9A41D5BA82E00CCFB1B /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 4ECCF9A21D5BA82E00CCFB1B /* main.js */; };
+		4ECCF9A61D5BA84900CCFB1B /* FeedbackFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCF9A51D5BA84900CCFB1B /* FeedbackFormViewController.swift */; };
+		4EFC91121D6B8156008D0982 /* PsiphonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFC91111D6B8156008D0982 /* PsiphonData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,8 +94,6 @@
 
 /* Begin PBXFileReference section */
 		443FE8F11D6E1B290086DC29 /* psiphon_config.json.stub */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = psiphon_config.json.stub; sourceTree = "<group>"; };
-		447615ED1C73ABA50015077B /* LogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
-		447615EE1C73ABA50015077B /* LogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
 		44980AD81D63ACA600B78274 /* PsiphonTunnelController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PsiphonTunnelController.framework; sourceTree = SOURCE_ROOT; };
 		449BE1FA1C569843006FDC28 /* Psiphon.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Psiphon.pch; sourceTree = "<group>"; };
 		449BE2031C57D402006FDC28 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -165,9 +170,19 @@
 		44F143C01C763B2D00386142 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = SOURCE_ROOT; };
 		44F143C11C763B2D00386142 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = SOURCE_ROOT; };
 		44F556191C6D01040038D33A /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		4E34EA251D6F48EE00367FCE /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
+		4E4ABF581D6F833B004BF29F /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		4E6795DE1D6DF36F007A6972 /* ResultMonad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultMonad.swift; sourceTree = "<group>"; };
 		4E6BA42B1D5B85A40027EDC8 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		4E6BA42D1D5B85EB0027EDC8 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
-		4E6BA42E1D5B85EB0027EDC8 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
+		4EBDCA131D70AF5300E7A516 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4EBDCA151D75E39E00E7A516 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		4ECCF9961D5BA45500CCFB1B /* Psiphon-Browser-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Psiphon-Browser-Bridging-Header.h"; sourceTree = "<group>"; };
+		4ECCF99D1D5BA51900CCFB1B /* psiphon_config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = psiphon_config.json; path = "../../myforks/psiphon-ios/Psiphon-Browser/Psiphon-Browser/psiphon_config.json"; sourceTree = "<group>"; };
+		4ECCF99F1D5BA7F900CCFB1B /* feedback.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = feedback.html; sourceTree = "<group>"; };
+		4ECCF9A21D5BA82E00CCFB1B /* main.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = main.js; sourceTree = "<group>"; };
+		4ECCF9A51D5BA84900CCFB1B /* FeedbackFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackFormViewController.swift; sourceTree = "<group>"; };
+		4EFC910F1D6B7C22008D0982 /* Psi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Psi.framework; sourceTree = SOURCE_ROOT; };
+		4EFC91111D6B8156008D0982 /* PsiphonData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PsiphonData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,7 +191,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				44CC93E21D6CD8720082F743 /* PsiphonTunnelController.framework in Frameworks */,
-				44CC93E11D6CD85A0082F743 /* PsiphonTunnelController.framework in Frameworks */,
 				44F143C21C763B2D00386142 /* libcrypto.a in Frameworks */,
 				44F143C31C763B2D00386142 /* libssl.a in Frameworks */,
 				44F5561A1C6D01040038D33A /* CoreTelephony.framework in Frameworks */,
@@ -318,18 +332,25 @@
 				449BE23B1C57D82A006FDC28 /* Browser */,
 				44B0A2051C568BD20064D364 /* AppDelegate.h */,
 				44B0A2061C568BD20064D364 /* AppDelegate.m */,
-				447615ED1C73ABA50015077B /* LogViewController.h */,
-				447615EE1C73ABA50015077B /* LogViewController.m */,
 				44B0A2081C568BD20064D364 /* PsiphonBrowserViewController.h */,
-				4E6BA42D1D5B85EB0027EDC8 /* FeedbackViewController.h */,
-				4E6BA42E1D5B85EB0027EDC8 /* FeedbackViewController.m */,
 				44B0A2091C568BD20064D364 /* PsiphonBrowserViewController.m */,
+				4EBDCA131D70AF5300E7A516 /* Constants.swift */,
+				4E4ABF581D6F833B004BF29F /* FeedbackViewController.swift */,
+				4ECCF9A51D5BA84900CCFB1B /* FeedbackFormViewController.swift */,
+				4E34EA251D6F48EE00367FCE /* LogViewController.swift */,
+				4E6795DE1D6DF36F007A6972 /* ResultMonad.swift */,
+				4EBDCA151D75E39E00E7A516 /* Common.swift */,
+				4EFC91111D6B8156008D0982 /* PsiphonData.swift */,
+				4ECCF99F1D5BA7F900CCFB1B /* feedback.html */,
+				4ECCF9A21D5BA82E00CCFB1B /* main.js */,
+				4ECCF99D1D5BA51900CCFB1B /* psiphon_config.json */,
 				44B0A2111C568BD20064D364 /* Assets.xcassets */,
 				44B0A2131C568BD20064D364 /* LaunchScreen.storyboard */,
 				4E6BA42B1D5B85A40027EDC8 /* Main.storyboard */,
 				44B0A2161C568BD20064D364 /* Info.plist */,
 				44B0A20E1C568BD20064D364 /* Psiphon_Browser.xcdatamodeld */,
 				44B0A2021C568BD20064D364 /* Supporting Files */,
+				4ECCF9961D5BA45500CCFB1B /* Psiphon-Browser-Bridging-Header.h */,
 			);
 			path = "Psiphon-Browser";
 			sourceTree = "<group>";
@@ -348,6 +369,7 @@
 			children = (
 				44980AD81D63ACA600B78274 /* PsiphonTunnelController.framework */,
 				44F143C01C763B2D00386142 /* libcrypto.a */,
+				4EFC910F1D6B7C22008D0982 /* Psi.framework */,
 				44F143C11C763B2D00386142 /* libssl.a */,
 				44F556191C6D01040038D33A /* CoreTelephony.framework */,
 				449BE2071C57D41E006FDC28 /* libxml2.2.tbd */,
@@ -386,12 +408,14 @@
 		44B0A1F71C568BD20064D364 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Psiphon;
 				TargetAttributes = {
 					44B0A1FE1C568BD20064D364 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = Q6HLNEX92A;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -428,11 +452,13 @@
 				449BE2931C57D84F006FDC28 /* gsearch.png in Resources */,
 				449BE28B1C57D84F006FDC28 /* MainWindow-iPad.strings in Resources */,
 				449BE2941C57D84F006FDC28 /* iphone_delete_button.png in Resources */,
+				4ECCF99E1D5BA51900CCFB1B /* psiphon_config.json in Resources */,
 				449BE2851C57D84F006FDC28 /* BookmarkFoldersForm.xib in Resources */,
 				449BE28D1C57D84F006FDC28 /* bookmarks.png in Resources */,
 				449BE28C1C57D84F006FDC28 /* bookmark.png in Resources */,
 				449BE2841C57D84F006FDC28 /* MainWindow-iPad.xib in Resources */,
 				449BE2871C57D84F006FDC28 /* bookmarks.strings in Resources */,
+				4ECCF9A41D5BA82E00CCFB1B /* main.js in Resources */,
 				449BE2861C57D84F006FDC28 /* BookmarkItem.xib in Resources */,
 				449BE29F1C57D84F006FDC28 /* unable_to_connect.html in Resources */,
 				449BE2961C57D84F006FDC28 /* magglass.png in Resources */,
@@ -449,6 +475,7 @@
 				449BE28A1C57D84F006FDC28 /* Bookmarks.strings in Resources */,
 				449BE2991C57D84F006FDC28 /* tab_add.png in Resources */,
 				449BE29E1C57D84F006FDC28 /* MainWindow.xib in Resources */,
+				4ECCF9A01D5BA7F900CCFB1B /* feedback.html in Resources */,
 				449BE2951C57D84F006FDC28 /* left.png in Resources */,
 				449BE28F1C57D84F006FDC28 /* configure.png in Resources */,
 			);
@@ -477,7 +504,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EBDCA141D70AF5300E7A516 /* Constants.swift in Sources */,
 				449BE2571C57D82A006FDC28 /* BookmarksController.m in Sources */,
+				4EBDCA161D75E39E00E7A516 /* Common.swift in Sources */,
 				449BE2AB1C57D865006FDC28 /* JAHPCanonicalRequest.m in Sources */,
 				44B0A2101C568BD20064D364 /* Psiphon_Browser.xcdatamodeld in Sources */,
 				44B0A20A1C568BD20064D364 /* PsiphonBrowserViewController.m in Sources */,
@@ -485,19 +514,22 @@
 				449BE25E1C57D82A006FDC28 /* UIMainView.m in Sources */,
 				449BE25B1C57D82A006FDC28 /* BrowserViewController.m in Sources */,
 				449BE2891C57D84F006FDC28 /* BrowserModel.xcdatamodeld in Sources */,
+				4EFC91121D6B8156008D0982 /* PsiphonData.swift in Sources */,
 				449BE2A91C57D865006FDC28 /* JAHPAuthenticatingHTTPProtocol.m in Sources */,
 				44B0A2071C568BD20064D364 /* AppDelegate.m in Sources */,
 				449BE2AC1C57D865006FDC28 /* JAHPQNSURLSessionDemux.m in Sources */,
 				44B0A2041C568BD20064D364 /* main.m in Sources */,
 				449BE2591C57D82A006FDC28 /* BrowserDelegate.m in Sources */,
 				449BE25D1C57D82A006FDC28 /* Tab.m in Sources */,
+				4E34EA261D6F48EE00367FCE /* LogViewController.swift in Sources */,
 				449BE2581C57D82A006FDC28 /* BookmarksFormController.m in Sources */,
-				4E6BA42F1D5B85EB0027EDC8 /* FeedbackViewController.m in Sources */,
 				449BE2561C57D82A006FDC28 /* BookmarkItem.m in Sources */,
+				4E6795DF1D6DF36F007A6972 /* ResultMonad.swift in Sources */,
 				449BE2541C57D82A006FDC28 /* BookmarkFolderFormController.m in Sources */,
 				449BE25A1C57D82A006FDC28 /* BrowserMainWindow.m in Sources */,
 				449BE2AA1C57D865006FDC28 /* JAHPCacheStoragePolicy.m in Sources */,
-				447615EF1C73ABA50015077B /* LogViewController.m in Sources */,
+				4E4ABF591D6F833B004BF29F /* FeedbackViewController.swift in Sources */,
+				4ECCF9A61D5BA84900CCFB1B /* FeedbackFormViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +583,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -560,8 +593,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -598,6 +633,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -607,8 +643,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -642,6 +680,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Q6HLNEX92A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -658,6 +698,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.psiphon.browser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_BITCODE_FROM_COPIED_FILES = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Psiphon-Browser/Psiphon-Browser-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -666,6 +709,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Q6HLNEX92A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -682,6 +727,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.psiphon.browser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_BITCODE_FROM_COPIED_FILES = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Psiphon-Browser/Psiphon-Browser-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

@@ -39,6 +39,7 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 - (NSString *)getHomepage;
+- (void) postLogEntryNotification:(NSString*)format, ...;
 
 
 @end

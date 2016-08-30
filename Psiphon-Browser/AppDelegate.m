@@ -18,6 +18,7 @@
  */
 
 #import "AppDelegate.h"
+#import "Psiphon_Browser-Swift.h"
 
 @interface AppDelegate ()
 
@@ -35,6 +36,7 @@
     // Do any additional setup after loading the view, typically from a nib
     
     self.tunnelController = [PsiphonTunnelController sharedInstance];
+    [PsiphonData sharedInstance];
     self.tunnelController.tunneledAppProtocolDelegate = self;
     [self.tunnelController startTunnel];
     
