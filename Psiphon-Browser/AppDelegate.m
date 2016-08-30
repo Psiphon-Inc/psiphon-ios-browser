@@ -18,6 +18,7 @@
  */
 
 #import "AppDelegate.h"
+#import "Psiphon_Browser-Swift.h"
 
 @interface AppDelegate ()
 
@@ -35,6 +36,7 @@
     // Do any additional setup after loading the view, typically from a nib
     
     self.tunnelController = [PsiphonTunnelController sharedInstance];
+    [PsiphonData sharedInstance];
     self.tunnelController.tunneledAppProtocolDelegate = self;
     [self.tunnelController startTunnel];
     
@@ -259,7 +261,6 @@
 - (void) onConnected {
     [self onDiagnosticMessage : @"Psiphon connected"];
     [self postLogEntryNotification:@"Connected", nil];
-    
 }
 
 - (void) onConnecting {
@@ -269,16 +270,17 @@
 - (void) onDiagnosticMessage: (NSString *) message {
     NSLog(@"%@", message);
     [self postLogEntryNotification:@"%@", message];
-    
 }
+
 - (void) onAvailableEgressRegions: (NSArray *) regions{
     NSString *message = [regions componentsJoinedByString:@", "];
     [self postLogEntryNotification:@"Available regions: %@", message];
-    
 }
+
 - (void) onSocksProxyPortInUse: (NSInteger) port{
     [self postLogEntryNotification:@"local SOCKS proxy port %d is in use.", port];
 }
+
 - (void) onHttpProxyPortInUse: (NSInteger) port{
     [self postLogEntryNotification:@"local HTTP proxy port %d is in use.", port];
 }
@@ -322,7 +324,6 @@
     [self postLogEntryNotification:@"bytes received: %d", received];
 }
 - (void) onStartedWaitingForNetworkConnectivity{
-    
 }
 
 @end

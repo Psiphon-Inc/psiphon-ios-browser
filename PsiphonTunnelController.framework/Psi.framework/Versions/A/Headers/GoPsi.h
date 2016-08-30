@@ -20,6 +20,8 @@
 - (void)notice:(NSString*)noticeJSON;
 @end
 
+FOUNDATION_EXPORT void GoPsiSendFeedback(NSString* configJson, NSString* diagnosticsJson, NSString* b64EncodedPublicKey, NSString* uploadServer, NSString* uploadPath, NSString* uploadServerHeaders);
+
 FOUNDATION_EXPORT void GoPsiSetClientVerificationPayload(NSString* clientVerificationPayload);
 
 FOUNDATION_EXPORT BOOL GoPsiStart(NSString* configJson, NSString* embeddedServerEntryList, id<GoPsiPsiphonProvider> provider, BOOL useDeviceBinder, NSError** error);

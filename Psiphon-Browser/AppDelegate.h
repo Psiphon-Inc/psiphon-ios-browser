@@ -21,7 +21,6 @@
 #import <CoreData/CoreData.h>
 #import <PsiphonTunnelController/PsiphonTunnelController.h>
 #import "JiveAuthenticatingHTTPProtocol/JAHPAuthenticatingHTTPProtocol.h"
-#import "LogViewController.h"
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, TunneledAppProtocol>
@@ -39,6 +38,7 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 - (NSString *)getHomepage;
+- (void) postLogEntryNotification:(NSString*)format, ...;
 
 
 @end
