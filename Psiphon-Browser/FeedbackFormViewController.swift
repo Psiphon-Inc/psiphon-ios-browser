@@ -40,7 +40,7 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
         let url = URL(fileURLWithPath: indexHTMLPath!)
         let request = URLRequest(url: url)
         
-        self.webView = WKWebView(frame:self.view.frame, configuration: wkConfig)
+        self.webView = WKWebView(frame: self.view.frame, configuration: wkConfig)
         
         self.webView!.load(request)
 
@@ -93,7 +93,7 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
 
                     let entry: [String:AnyObject] = [
                         "id": statusEntry.getId(),
-                        "timestamp!!timestamp": statusEntry.getTimestamp(), // TODO: Convert to ISO8601String
+                        "timestamp!!timestamp": statusEntry.getTimestamp(),
                         "priority": statusEntry.getPriority(),
                         "formatArgs": valOrNull(opt: statusEntry.getFormatArgs()), // Sensitive format args pre-removed
                         "throwable": valOrNull(opt: statusEntry.getThrowable() as! AnyObject?)
@@ -107,11 +107,14 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
                     "SystemInformation": [
                         "Build": gatherDeviceInfo(),
                         "PsiphonInfo": [
-                            "CLIENT_VERSION": "1",
+                            "CLIENT_VERSION": Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String,
                             "PROPAGATION_CHANNEL_ID": PsiphonConfig.sharedInstance.getField(field: "PropagationChannelId"),
                             "SPONSOR_ID": PsiphonConfig.sharedInstance.getField(field: "SponsorId")
                         ],
-                        "langauge": NSLocale.preferredLanguages[0] // TODO: Is this right "en-CA" desired "en"?
+                        "isAppStoreBuild": isAppStoreBuild(),
+                        "isJailBroken": isJailBroken(),
+                        "language": NSLocale.preferredLanguages[0], // TODO: Is this right "en-CA" desired "en"?
+                        "networkTypeName": PsiphonCommon.getNetworkType()
                     ]
                 ]
                 

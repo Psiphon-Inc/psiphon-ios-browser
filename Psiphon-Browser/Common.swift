@@ -21,6 +21,9 @@ class PsiphonCommon {
         
         return randomBytes
     }
+    static func getNetworkType() -> String {
+        return "UNKNOWN"
+    }
 }
 
 class PsiphonConfig {
@@ -46,5 +49,44 @@ class PsiphonConfig {
     
     public func getField(field: String) -> AnyObject {
         return config[field]! // TODO: should check exists / handle exception
+    }
+}
+
+extension Notification {
+    init() {
+        self.init()
+    }
+    func withName(name: String) -> Result<Notification> {
+        if (name == self.name.rawValue) {
+            return Result<Notification>.Value(self)
+        } else {
+            return Result.Error("Got wrong notification type. Expected: " + name + ". Got: " + self.name.rawValue)
+        }
+    }
+}
+
+// http://stackoverflow.com/questions/28016578/swift-how-to-create-a-date-time-stamp-and-format-as-iso-8601-rfc-3339-utc-tim
+// ISO8601DateFormatter only available in iOS 10.0+
+
+// Follow format specified in `getISO8601String` https://bitbucket.org/psiphon/psiphon-circumvention-system/src/default/Android/app/src/main/java/com/psiphon3/psiphonlibrary/Utils.java?fileviewer=file-view-default
+extension Date {
+    struct Formatter {
+        static let iso8601: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.calendar = Calendar(identifier: .iso8601)
+            formatter.locale = Locale(identifier: "en_US_POSIX") // https://developer.apple.com/library/mac/qa/qa1480/_index.html
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSX"
+            return formatter
+        }()
+    }
+    var iso8601: String {
+        return Formatter.iso8601.string(from: self)
+    }
+}
+
+extension String {
+    var dateFromISO8601: Date? {
+        return Date.Formatter.iso8601.date(from: self)
     }
 }

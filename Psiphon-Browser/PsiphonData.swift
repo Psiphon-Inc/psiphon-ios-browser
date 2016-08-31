@@ -10,18 +10,6 @@ import Foundation
 
 infix operator >>= { associativity left }
 
-extension Notification {
-    init() {
-        self.init()
-    }
-    func withName(name: String) -> Result<Notification> {
-        if (name == self.name.rawValue) {
-            return Result<Notification>.Value(self)
-        } else {
-            return Result.Error("Got wrong notification type. Expected: " + name + ". Got: " + self.name.rawValue)
-        }
-    }
-}
 
 // Retrieve entry and convert to desired type with f
 func getWithKey<T,U>(key: String, f: (T) -> (U)) -> (Notification) -> Result<U> {
@@ -57,12 +45,10 @@ class StatusEntry {
          * The log does not contain sensitive information.
          */
         case NOT_SENSITIVE
-        
         /**
          * The log message itself is sensitive information.
          */
         case SENSITIVE_LOG
-        
         /**
          * The format arguments to the log messages are sensitive, but the
          * log message itself is not.
@@ -80,9 +66,7 @@ class StatusEntry {
     }
     
     public func getTimestamp() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        return dateFormatter.string(from: self.Timestamp)
+        return self.Timestamp.iso8601
     }
     
     public func getId() -> String {
@@ -139,7 +123,12 @@ class DiagnosticEntry {
     }
 
     public func getTimestamp() -> String {
+        return self.Timestamp.iso8601
+    }
+    
+    public func getTimestampForDisplay() -> String {
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
         dateFormatter.dateFormat = "HH:mm"
         return dateFormatter.string(from: self.Timestamp)
     }
@@ -216,7 +205,7 @@ class DiagnosticEntry {
         } else {
             entries = self.diagnosticHistory
         }
-        return entries.map { ( $0 ).getTimestamp() + " " + ( $0 ).getMsg() } // map to string array of formatted entries for display
+        return entries.map { ( $0 ).getTimestampForDisplay() + " " + ( $0 ).getMsg() } // map to string array of formatted entries for display
     }
     
     func getStatusHistory() -> [StatusEntry] {
