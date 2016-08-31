@@ -11,6 +11,14 @@ import UIKit
 import WebKit
 import Security
 
+func valOrNull(opt: AnyObject?) -> AnyObject {
+    if let val = opt {
+        return val
+    } else {
+        return NSNull()
+    }
+}
+
 class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
     @IBOutlet var containerView : UIWebView? = nil
     var webView: WKWebView?
@@ -40,6 +48,7 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
     }
 
     // Received javascript callback with feedback form info
+    // TODO: add comment referencing android code
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         
         do {
@@ -61,6 +70,8 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
                 ]
             ]
             
+            PsiphonData.sharedInstance.addStatusEntry(id: self.description, formatArgs: nil, throwable: nil)
+            
             // If user decides to disclose diagnostics data
             if (sendDiagnosticInfo == true) {
                 
@@ -80,20 +91,13 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
                 for statusEntry in PsiphonData.sharedInstance.getStatusHistory() {
                     // Sensitive logs pre-removed
 
-                    var entry: [String:AnyObject] = [
+                    let entry: [String:AnyObject] = [
                         "id": statusEntry.getId(),
                         "timestamp!!timestamp": statusEntry.getTimestamp(), // TODO: Convert to ISO8601String
                         "priority": statusEntry.getPriority(),
-                        "formatArgs": statusEntry.getFormatArgs() // Sensitive format args pre-removed
+                        "formatArgs": valOrNull(opt: statusEntry.getFormatArgs()), // Sensitive format args pre-removed
+                        "throwable": valOrNull(opt: statusEntry.getThrowable() as! AnyObject?)
                     ]
-                    if let t = statusEntry.getThrowable() {
-                        entry["throwable"] = [
-                            "message": t.message,
-                            "stack": t.stackTrace
-                        ]
-                    } else {
-                        entry["throwable"] = NSNull()
-                    }
                     statusHistoryArray.append(entry)
                 }
                 
