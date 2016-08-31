@@ -20,3 +20,7 @@ struct Constants {
         static let LogEntry = "LogEntryKey"
     }
 }
+
+enum PsiphonError : Error {
+    case Runtime(String)
+}

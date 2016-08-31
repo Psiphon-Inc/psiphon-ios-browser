@@ -8,26 +8,15 @@
 
 import Foundation
 
-extension Array {
-    func takeLastN<T>(n: Int) -> [T] {
-        // TODO: handle as! errors?
-        if (self.count < n) {
-            return self.map { $0 as! T }
-        } else {
-            return self[self.count-n..<self.count].map { $0 as! T }
-        }
-    }
-}
-
 class PsiphonCommon {
-    static func getRandomBytes(numBytes: Int) -> [UInt8] {
+    static func getRandomBytes(numBytes: Int) -> [UInt8]? {
         let bytesCount = numBytes
         var randomBytes = [UInt8](repeating: 0, count: bytesCount)
         
         // Generate random bytes
         let result = SecRandomCopyBytes(kSecRandomDefault, bytesCount, &randomBytes)
         if (result != 0) {
-            // TODO: pretty fatal error
+            return nil
         }
         
         return randomBytes

@@ -32,16 +32,15 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
         let url = URL(fileURLWithPath: indexHTMLPath!)
         let request = URLRequest(url: url)
         
-        self.webView = WKWebView(frame:self.view.frame,
-                                   configuration: wkConfig)
+        self.webView = WKWebView(frame:self.view.frame, configuration: wkConfig)
         
         self.webView!.load(request)
 
         self.view = self.webView!
     }
 
+    // Received javascript callback with feedback form info
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        //print("Got callback message: \(message.body)") // TODO: remove
         
         do {
             let dataString: String = message.body as! String
@@ -79,19 +78,22 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
                 var statusHistoryArray: [[String:AnyObject]] = []
                 
                 for statusEntry in PsiphonData.sharedInstance.getStatusHistory() {
-                    // Sensitive logs pre-filtered out
-                    
-                    let entry: [String:AnyObject] = [
+                    // Sensitive logs pre-removed
+
+                    var entry: [String:AnyObject] = [
                         "id": statusEntry.getId(),
                         "timestamp!!timestamp": statusEntry.getTimestamp(), // TODO: Convert to ISO8601String
                         "priority": statusEntry.getPriority(),
-                        "formatArgs": statusEntry.getFormatArgs(), // Sensitive format args pre-filtered out
-                        "throwable": [
-                            "message": statusEntry.getThrowable().message,
-                            "stack": statusEntry.getThrowable().stackTrace
-                        ]
+                        "formatArgs": statusEntry.getFormatArgs() // Sensitive format args pre-removed
                     ]
-                    
+                    if let t = statusEntry.getThrowable() {
+                        entry["throwable"] = [
+                            "message": t.message,
+                            "stack": t.stackTrace
+                        ]
+                    } else {
+                        entry["throwable"] = NSNull()
+                    }
                     statusHistoryArray.append(entry)
                 }
                 
@@ -114,12 +116,14 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
             
             // Generate random feedback ID
             var rndmHexId: String = ""
-            let randomBytes: [UInt8] = PsiphonCommon.getRandomBytes(numBytes: 8)
+            guard let randomBytes: [UInt8] = PsiphonCommon.getRandomBytes(numBytes: 8) else {
+                throw PsiphonError.Runtime("failed to generate enough random bytes")
+            }
             
             // Turn randomBytes into array of hexadecimal strings
             // Join array of strings into single string
             // http://jamescarroll.xyz/2015/09/09/safely-generating-cryptographically-secure-random-numbers-with-swift/
-            rndmHexId = randomBytes.map({String(format: "%02hhX", $0)}).joined(separator: "") // TODO: move hex-gen into common?
+            rndmHexId = randomBytes.map({String(format: "%02hhX", $0)}).joined(separator: "")
             
             feedbackBlob["Metadata"] = [
                 "id": rndmHexId,
@@ -133,8 +137,10 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
             print(jsonString)
             
             sendFeedback(feedbackData: jsonString)
-        } catch {
-          // TODO: handle exception
+        } catch PsiphonError.Runtime(let error) {
+            PsiphonData.sharedInstance.addStatusEntry(id: self.description, formatArgs: [], throwable: Throwable(message: error, stackTrace: Thread.callStackSymbols))
+        } catch(let unknownError) {
+            PsiphonData.sharedInstance.addStatusEntry(id: self.description, formatArgs: [], throwable: Throwable(message: unknownError.localizedDescription, stackTrace: Thread.callStackSymbols))
         }
         
         self.dismiss(animated: true, completion: nil) // Dismiss feedback view

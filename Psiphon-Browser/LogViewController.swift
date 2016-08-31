@@ -48,7 +48,7 @@ class LogViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         switch result {
         case .Value(_):
-            displayedLogs = PsiphonData.sharedInstance.getDiagnosticLogs()
+            displayedLogs = PsiphonData.sharedInstance.getDiagnosticLogs(n:10)
             tableView.reloadData()
             scrollToBottom()
         case let .Error(error):

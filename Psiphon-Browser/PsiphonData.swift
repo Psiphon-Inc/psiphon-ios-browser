@@ -49,7 +49,7 @@ class StatusEntry {
     private var Id: String
     private var Sensitivity: StatusEntry.SensitivityLevel
     private var FormatArgs: [AnyObject]
-    private var Throwable: Throwable
+    private var Throwable: Throwable?
     private var Priority: Int
     
     public enum SensitivityLevel {
@@ -70,12 +70,16 @@ class StatusEntry {
         case SENSITIVE_FORMAT_ARGS
     }
     
-    private init(id: String, formatArgs: [AnyObject], throwable: Throwable, priority: Int) {
+    private init(id: String, formatArgs: [AnyObject], throwable: Throwable?, priority: Int) {
         Timestamp = Date()
         Id = id
         Sensitivity = StatusEntry.SensitivityLevel.NOT_SENSITIVE
         FormatArgs = formatArgs
-        Throwable = throwable
+        if let t = throwable {
+            Throwable = t
+        } else {
+            Throwable = nil
+        }
         Priority = priority
     }
     
@@ -105,7 +109,7 @@ class StatusEntry {
         }
     }
     
-    func getThrowable() -> Throwable {
+    func getThrowable() -> Throwable? {
         return self.Throwable
     }
 }
@@ -199,7 +203,7 @@ class DiagnosticEntry {
         return Result<DiagnosticEntry>.Value(diagnosticEntry)
     }
     
-    func addStatusEntry(id: String, formatArgs: [AnyObject], throwable: Throwable) {
+    func addStatusEntry(id: String, formatArgs: [AnyObject], throwable: Throwable?) {
         let statusEntry = StatusEntry(id: id, formatArgs: formatArgs, throwable: throwable, priority: -1)
         self.statusHistory.append(statusEntry)
     }
@@ -212,7 +216,7 @@ class DiagnosticEntry {
         var entries: [DiagnosticEntry] = []
         
         if let numEntries = n {
-            entries = self.diagnosticHistory.takeLastN(n: numEntries)
+            entries = Array<DiagnosticEntry>(self.diagnosticHistory.suffix(numEntries))
         } else {
             entries = self.diagnosticHistory
         }
