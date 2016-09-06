@@ -7,6 +7,12 @@
 //
 
 import Foundation
+import SystemConfiguration
+
+struct ConnectionStatus {
+    var isConnected: Bool
+    var onWifi: Bool
+}
 
 class PsiphonCommon {
     static func getRandomBytes(numBytes: Int) -> [UInt8]? {
@@ -22,7 +28,40 @@ class PsiphonCommon {
         return randomBytes
     }
     static func getNetworkType() -> String {
-        return "UNKNOWN"
+        let connectionStatus = self.getConnectionStatus()
+        
+        switch (connectionStatus.isConnected, connectionStatus.onWifi) {
+        case (false, _):
+            return ""
+        case (true, false):
+            return "MOBILE"
+        case (true, true):
+            return "WIFI"
+        }
+    }
+    
+    // http://stackoverflow.com/questions/25623272/how-to-use-scnetworkreachability-in-swift
+    static func getConnectionStatus() -> ConnectionStatus {
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        
+        guard let defaultRouteReachability = withUnsafePointer(&zeroAddress, {
+            SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
+        }) else {
+            return ConnectionStatus(isConnected: false, onWifi: false)
+        }
+        
+        var flags : SCNetworkReachabilityFlags = []
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) {
+            return ConnectionStatus(isConnected: false, onWifi: false)
+        }
+        
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        let onWifi = !flags.contains(.isWWAN)
+        
+        return ConnectionStatus(isConnected: isReachable && !needsConnection, onWifi: onWifi)
     }
 }
 

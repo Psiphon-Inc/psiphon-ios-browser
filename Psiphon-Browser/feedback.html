@@ -715,6 +715,7 @@ $(function() {
 
     s = JSON.stringify({
       'responses': responses,
+      'language': $('#language_selector').val(),
       'feedback': $('#text_feedback_textarea').val(),
       'email': $('#text_feedback_email').val(),
       'sendDiagnosticInfo': !!$('#send_diagnostic').attr('checked')

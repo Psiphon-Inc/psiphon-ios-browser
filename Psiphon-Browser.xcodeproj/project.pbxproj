@@ -69,7 +69,7 @@
 		4E4ABF591D6F833B004BF29F /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4ABF581D6F833B004BF29F /* FeedbackViewController.swift */; };
 		4E6795DF1D6DF36F007A6972 /* ResultMonad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6795DE1D6DF36F007A6972 /* ResultMonad.swift */; };
 		4E6BA42C1D5B85A40027EDC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E6BA42B1D5B85A40027EDC8 /* Main.storyboard */; };
-		4EA59EC61D7756E1002D2E4F /* JailBroken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA59EC51D7756E1002D2E4F /* JailBroken.swift */; };
+		4EA59EC61D7756E1002D2E4F /* Jailbroken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA59EC51D7756E1002D2E4F /* Jailbroken.swift */; };
 		4EBDCA141D70AF5300E7A516 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBDCA131D70AF5300E7A516 /* Constants.swift */; };
 		4EBDCA161D75E39E00E7A516 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBDCA151D75E39E00E7A516 /* Common.swift */; };
 		4ECCF99E1D5BA51900CCFB1B /* psiphon_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 4ECCF99D1D5BA51900CCFB1B /* psiphon_config.json */; };
@@ -175,7 +175,7 @@
 		4E4ABF581D6F833B004BF29F /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		4E6795DE1D6DF36F007A6972 /* ResultMonad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultMonad.swift; sourceTree = "<group>"; };
 		4E6BA42B1D5B85A40027EDC8 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		4EA59EC51D7756E1002D2E4F /* JailBroken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JailBroken.swift; sourceTree = "<group>"; };
+		4EA59EC51D7756E1002D2E4F /* Jailbroken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Jailbroken.swift; sourceTree = "<group>"; };
 		4EBDCA131D70AF5300E7A516 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4EBDCA151D75E39E00E7A516 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		4ECCF9961D5BA45500CCFB1B /* Psiphon-Browser-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Psiphon-Browser-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -340,7 +340,7 @@
 				4EBDCA131D70AF5300E7A516 /* Constants.swift */,
 				4E4ABF581D6F833B004BF29F /* FeedbackViewController.swift */,
 				4ECCF9A51D5BA84900CCFB1B /* FeedbackFormViewController.swift */,
-				4EA59EC51D7756E1002D2E4F /* JailBroken.swift */,
+				4EA59EC51D7756E1002D2E4F /* Jailbroken.swift */,
 				4E34EA251D6F48EE00367FCE /* LogViewController.swift */,
 				4EFC91111D6B8156008D0982 /* PsiphonData.swift */,
 				4E6795DE1D6DF36F007A6972 /* ResultMonad.swift */,
@@ -513,7 +513,7 @@
 				449BE2AB1C57D865006FDC28 /* JAHPCanonicalRequest.m in Sources */,
 				44B0A2101C568BD20064D364 /* Psiphon_Browser.xcdatamodeld in Sources */,
 				44B0A20A1C568BD20064D364 /* PsiphonBrowserViewController.m in Sources */,
-				4EA59EC61D7756E1002D2E4F /* JailBroken.swift in Sources */,
+				4EA59EC61D7756E1002D2E4F /* Jailbroken.swift in Sources */,
 				449BE2551C57D82A006FDC28 /* BookmarkImporter.m in Sources */,
 				449BE25E1C57D82A006FDC28 /* UIMainView.m in Sources */,
 				449BE25B1C57D82A006FDC28 /* BrowserViewController.m in Sources */,

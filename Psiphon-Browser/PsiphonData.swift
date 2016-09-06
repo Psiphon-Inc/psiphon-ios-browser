@@ -38,7 +38,7 @@ class StatusEntry {
     private var Sensitivity: StatusEntry.SensitivityLevel
     private var FormatArgs: [AnyObject]?
     private var Throwable: Throwable?
-    private var Priority: Int
+    private var Priority: StatusEntry.PriorityLevel
     
     public enum SensitivityLevel {
         /**
@@ -56,10 +56,19 @@ class StatusEntry {
         case SENSITIVE_FORMAT_ARGS
     }
     
-    private init(id: String, formatArgs: [AnyObject]?, throwable: Throwable?, priority: Int) {
+    public enum PriorityLevel: Int {
+        case VERBOSE = 2
+        case DEBUG
+        case INFO
+        case WARN
+        case ERROR
+        case ASSERT
+    }
+    
+    private init(id: String, formatArgs: [AnyObject]?, throwable: Throwable?, sensitivity: SensitivityLevel, priority: PriorityLevel) {
         Timestamp = Date()
         Id = id
-        Sensitivity = StatusEntry.SensitivityLevel.NOT_SENSITIVE
+        Sensitivity = sensitivity
         FormatArgs = formatArgs
         Throwable = throwable
         Priority = priority
@@ -78,7 +87,7 @@ class StatusEntry {
     }
     
     public func getPriority() -> Int {
-        return self.Priority
+        return self.Priority.rawValue
     }
     
     public func getFormatArgs() -> [AnyObject]? {
@@ -144,6 +153,8 @@ class DiagnosticEntry {
 
 @objc class PsiphonData: NSObject {
     
+    
+    
     private var statusHistory: [StatusEntry] = []
     private var diagnosticHistory: [DiagnosticEntry] = []
     static let sharedInstance = PsiphonData()
@@ -188,8 +199,8 @@ class DiagnosticEntry {
         return Result<DiagnosticEntry>.Value(diagnosticEntry)
     }
     
-    func addStatusEntry(id: String, formatArgs: [AnyObject]?, throwable: Throwable?) {
-        let statusEntry = StatusEntry(id: id, formatArgs: formatArgs, throwable: throwable, priority: -1)
+    func addStatusEntry(id: String, formatArgs: [AnyObject]?, throwable: Throwable?, sensitivity: StatusEntry.SensitivityLevel, priority: StatusEntry.PriorityLevel) {
+        let statusEntry = StatusEntry(id: id, formatArgs: formatArgs, throwable: throwable, sensitivity: sensitivity, priority: priority)
         self.statusHistory.append(statusEntry)
     }
     

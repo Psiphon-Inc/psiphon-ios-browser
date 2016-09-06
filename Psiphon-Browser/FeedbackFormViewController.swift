@@ -70,7 +70,7 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
                 ]
             ]
             
-            PsiphonData.sharedInstance.addStatusEntry(id: self.description, formatArgs: nil, throwable: nil)
+            PsiphonData.sharedInstance.addStatusEntry(id: self.description, formatArgs: nil, throwable: nil, sensitivity: StatusEntry.SensitivityLevel.NOT_SENSITIVE, priority: StatusEntry.PriorityLevel.DEBUG)
             
             // If user decides to disclose diagnostics data
             if (sendDiagnosticInfo == true) {
@@ -112,8 +112,8 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
                             "SPONSOR_ID": PsiphonConfig.sharedInstance.getField(field: "SponsorId")
                         ],
                         "isAppStoreBuild": isAppStoreBuild(),
-                        "isJailBroken": isJailBroken(),
-                        "language": NSLocale.preferredLanguages[0], // TODO: Is this right "en-CA" desired "en"?
+                        "isJailbroken": isJailBroken(),
+                        "language": decodedJson["language"] as! String, // NSLocale.preferredLanguages[0].lowercased(), // TODO: Is this right "en-CA" desired "en"?
                         "networkTypeName": PsiphonCommon.getNetworkType()
                     ]
                 ]
@@ -145,9 +145,11 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
             
             sendFeedback(feedbackData: jsonString)
         } catch PsiphonError.Runtime(let error) {
-            PsiphonData.sharedInstance.addStatusEntry(id: self.description, formatArgs: [], throwable: Throwable(message: error, stackTrace: Thread.callStackSymbols))
+            PsiphonData.sharedInstance.addStatusEntry(id: self.description, formatArgs: [], throwable: Throwable(message: error, stackTrace: Thread.callStackSymbols),
+                                                      sensitivity: StatusEntry.SensitivityLevel.NOT_SENSITIVE, priority: StatusEntry.PriorityLevel.ERROR)
         } catch(let unknownError) {
-            PsiphonData.sharedInstance.addStatusEntry(id: self.description, formatArgs: [], throwable: Throwable(message: unknownError.localizedDescription, stackTrace: Thread.callStackSymbols))
+            PsiphonData.sharedInstance.addStatusEntry(id: self.description, formatArgs: [], throwable: Throwable(message: unknownError.localizedDescription, stackTrace: Thread.callStackSymbols),
+                                                      sensitivity: StatusEntry.SensitivityLevel.NOT_SENSITIVE, priority: StatusEntry.PriorityLevel.ERROR)
         }
         
         self.dismiss(animated: true, completion: nil) // Dismiss feedback view
