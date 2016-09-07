@@ -8,25 +8,6 @@
 
 import Foundation
 
-infix operator >>= { associativity left }
-
-
-// Retrieve entry and convert to desired type with f
-func getWithKey<T,U>(key: String, f: (T) -> (U)) -> (Notification) -> Result<U> {
-    func getEntryAndInit(notif: Notification) -> Result<U> {
-        if let userInfo = notif.userInfo as? Dictionary<String,T> {
-            if let entry = userInfo[key] {
-                return Result.Value(f(entry))
-            } else {
-                return Result.Error("No entry found for key: " + key )
-            }
-        } else {
-            return Result.Error("Malformed or unexpected notification: userInfo absent")
-        }
-    }
-    return getEntryAndInit
-}
-
 struct Throwable {
     var message: String // Error.localizedDescription
     var stackTrace: [String] // Thread.callStackSymbols()
@@ -74,22 +55,6 @@ class StatusEntry {
         Priority = priority
     }
     
-    public func getTimestamp() -> String {
-        return self.Timestamp.iso8601
-    }
-    
-    public func getId() -> String {
-        return self.Id
-    }
-    
-    func getSensitivity() -> StatusEntry.SensitivityLevel {
-        return self.Sensitivity
-    }
-    
-    public func getPriority() -> Int {
-        return self.Priority.rawValue
-    }
-    
     public func getFormatArgs() -> [AnyObject]? {
         if (self.getSensitivity() == StatusEntry.SensitivityLevel.SENSITIVE_FORMAT_ARGS) {
             return []
@@ -98,8 +63,24 @@ class StatusEntry {
         }
     }
     
+    public func getId() -> String {
+        return self.Id
+    }
+    
+    public func getPriority() -> Int {
+        return self.Priority.rawValue
+    }
+    
+    func getSensitivity() -> StatusEntry.SensitivityLevel {
+        return self.Sensitivity
+    }
+    
     func getThrowable() -> Throwable? {
         return self.Throwable
+    }
+    
+    public func getTimestamp() -> String {
+        return self.Timestamp.iso8601
     }
 }
 
@@ -135,26 +116,24 @@ class DiagnosticEntry {
         return self.Timestamp.iso8601
     }
     
-    public func getTimestampForDisplay() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale.current
-        dateFormatter.dateFormat = "HH:mm"
-        return dateFormatter.string(from: self.Timestamp)
+    public func getData() -> [String:AnyObject] {
+        return self.Data
     }
     
     public func getMsg() -> String {
         return self.Msg
     }
     
-    public func getData() -> [String:AnyObject] {
-        return self.Data
+    public func getTimestampForDisplay() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.string(from: self.Timestamp)
     }
 }
 
 @objc class PsiphonData: NSObject {
-    
-    
-    
+ 
     private var statusHistory: [StatusEntry] = []
     private var diagnosticHistory: [DiagnosticEntry] = []
     static let sharedInstance = PsiphonData()
@@ -170,15 +149,17 @@ class DiagnosticEntry {
             object: nil)
     }
     
+    // Don't need to check notification.name.rawvalue, because of observer pattern
     func receivedNewLogEntryNotification(aNotification: Notification) {
-        let result = aNotification.withName(name: Constants.Notifications.NewLogEntry) >>= getWithKey(key: Constants.Keys.LogEntry, f: DiagnosticEntry.init) >>= self.addDiagnosticEntry
+        let result: Result<String> = aNotification.getWithKey(key: Constants.Keys.LogEntry)
         
         switch result {
-        case let .Value(diagnosticEntry):
-            if (diagnosticEntry.Msg == "Connected") {
+        case let .Value(message):
+            if (message == "Connected") {
                 noticeConnectionEstablished()
+            } else {
+                self.addDiagnosticEntry(diagnosticEntry: DiagnosticEntry(msg: message))
             }
-            noticeLogAdded()
         case let .Error(error):
             print(error)
         }
@@ -194,9 +175,9 @@ class DiagnosticEntry {
         NotificationQueue.default.enqueue(notif, postingStyle: NotificationQueue.PostingStyle.now)
     }
     
-    func addDiagnosticEntry(diagnosticEntry: DiagnosticEntry) -> Result<DiagnosticEntry> {
+    func addDiagnosticEntry(diagnosticEntry: DiagnosticEntry) {
         self.diagnosticHistory.append(diagnosticEntry)
-        return Result<DiagnosticEntry>.Value(diagnosticEntry)
+        noticeLogAdded()
     }
     
     func addStatusEntry(id: String, formatArgs: [AnyObject]?, throwable: Throwable?, sensitivity: StatusEntry.SensitivityLevel, priority: StatusEntry.PriorityLevel) {

@@ -9,24 +9,12 @@
 import Foundation
 import SystemConfiguration
 
-struct ConnectionStatus {
-    var isConnected: Bool
-    var onWifi: Bool
-}
-
 class PsiphonCommon {
-    static func getRandomBytes(numBytes: Int) -> [UInt8]? {
-        let bytesCount = numBytes
-        var randomBytes = [UInt8](repeating: 0, count: bytesCount)
-        
-        // Generate random bytes
-        let result = SecRandomCopyBytes(kSecRandomDefault, bytesCount, &randomBytes)
-        if (result != 0) {
-            return nil
-        }
-        
-        return randomBytes
+    struct ConnectionStatus {
+        var isConnected: Bool
+        var onWifi: Bool
     }
+    
     static func getNetworkType() -> String {
         let connectionStatus = self.getConnectionStatus()
         
@@ -63,6 +51,19 @@ class PsiphonCommon {
         
         return ConnectionStatus(isConnected: isReachable && !needsConnection, onWifi: onWifi)
     }
+    
+    static func getRandomBytes(numBytes: Int) -> Result<[UInt8]> {
+        let bytesCount = numBytes
+        var randomBytes = [UInt8](repeating: 0, count: bytesCount)
+        
+        // Generate random bytes
+        let result = SecRandomCopyBytes(kSecRandomDefault, bytesCount, &randomBytes)
+        if (result != 0) {
+            return Result.Error("Failed to generate \(numBytes) random bytes")
+        }
+        
+        return Result.Value(randomBytes)
+    }
 }
 
 class PsiphonConfig {
@@ -87,26 +88,26 @@ class PsiphonConfig {
     }
     
     public func getField(field: String) -> AnyObject {
-        return config[field]! // TODO: should check exists / handle exception
+        return config[field]!
     }
 }
 
 extension Notification {
-    init() {
-        self.init()
-    }
-    func withName(name: String) -> Result<Notification> {
-        if (name == self.name.rawValue) {
-            return Result<Notification>.Value(self)
+    func getWithKey<T>(key: String) -> Result<T> {
+        if let userInfo = self.userInfo as? Dictionary<String,T> {
+            if let entry = userInfo[key] {
+                return Result.Value(entry)
+            } else {
+                return Result.Error("No entry found for key: " + key )
+            }
         } else {
-            return Result.Error("Got wrong notification type. Expected: " + name + ". Got: " + self.name.rawValue)
+            return Result.Error("Malformed or unexpected notification: userInfo absent")
         }
     }
 }
 
 // http://stackoverflow.com/questions/28016578/swift-how-to-create-a-date-time-stamp-and-format-as-iso-8601-rfc-3339-utc-tim
 // ISO8601DateFormatter only available in iOS 10.0+
-
 // Follow format specified in `getISO8601String` https://bitbucket.org/psiphon/psiphon-circumvention-system/src/default/Android/app/src/main/java/com/psiphon3/psiphonlibrary/Utils.java?fileviewer=file-view-default
 extension Date {
     struct Formatter {

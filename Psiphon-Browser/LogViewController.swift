@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  LogViewController.swift
 //  Psiphon-Browser
 //
 //  Created by Miro Kuratczyk on 2016-08-25.
@@ -33,27 +33,13 @@ class LogViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func receivedConnectionEstablished(aNotification: Notification) {
-        let result = aNotification.withName(name: Constants.Notifications.ConnectionEstablished)
-        
-        switch result {
-        case .Value(_):
-            self.segmentedControl.setEnabled(true, forSegmentAt: 0)
-        case let .Error(error):
-            print("Error receiving notification: " + String(error))
-        }
+        self.segmentedControl.setEnabled(true, forSegmentAt: 0)
     }
     
     func receivedUpdateLogsNotification(aNotification: Notification) {
-        let result = aNotification.withName(name: Constants.Notifications.DisplayLogEntry)
-        
-        switch result {
-        case .Value(_):
-            displayedLogs = PsiphonData.sharedInstance.getDiagnosticLogs(n:10)
-            tableView.reloadData()
-            scrollToBottom()
-        case let .Error(error):
-            print("Error receiving notification: " + String(error))
-        }
+        displayedLogs = PsiphonData.sharedInstance.getDiagnosticLogs(n:10)
+        tableView.reloadData()
+        scrollToBottom()
     }
     
     func scrollToBottom() {
@@ -63,21 +49,19 @@ class LogViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     @IBAction func segmentedControlButtonPressed(_ sender: UISegmentedControl) {
         if (sender.selectedSegmentIndex == Buttons.OPEN_BROWSER.rawValue) {
-            
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            
             let homepage = appDelegate.getHomepage()
             let pageToLoad = homepage != nil ? homepage! : ""
             
             let browserVC = PsiphonBrowserViewController()
             let navCntrl = UINavigationController.init(rootViewController: browserVC)
             navCntrl.navigationBar.isHidden = true
-            self.present(navCntrl, animated: true, completion: { browserVC.addTab(withAddress: pageToLoad)} )
             
+            self.present(navCntrl, animated: true, completion: { browserVC.addTab(withAddress: pageToLoad) })
         } else if (sender.selectedSegmentIndex == Buttons.FEEDBACK.rawValue) {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "FeedbackViewController")
             self.present(vc!, animated: true, completion: nil)
-        } else {
-            // Unreachable: Do nothing
         }
         
         scrollToBottom()
@@ -97,9 +81,5 @@ class LogViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.textLabel?.numberOfLines = 0
         
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       print("You selected cell #\(indexPath.row)!") // TODO: remove
     }
 }
