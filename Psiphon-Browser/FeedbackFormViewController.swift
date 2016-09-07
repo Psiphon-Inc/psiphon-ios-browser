@@ -50,7 +50,6 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
     // Received javascript callback with feedback form info
     // TODO: add comment referencing android code
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        
         do {
             let dataString: String = message.body as! String
             let data: Data = dataString.data(using: String.Encoding.utf8) as Data!
@@ -70,8 +69,6 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
                 ]
             ]
             
-            PsiphonData.sharedInstance.addStatusEntry(id: self.description, formatArgs: nil, throwable: nil, sensitivity: StatusEntry.SensitivityLevel.NOT_SENSITIVE, priority: StatusEntry.PriorityLevel.DEBUG)
-            
             // If user decides to disclose diagnostics data
             if (sendDiagnosticInfo == true) {
                 
@@ -88,9 +85,7 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
                 
                 var statusHistoryArray: [[String:AnyObject]] = []
                 
-                for statusEntry in PsiphonData.sharedInstance.getStatusHistory() {
-                    // Sensitive logs pre-removed
-
+                for statusEntry in PsiphonData.sharedInstance.getStatusHistory() { // Sensitive logs pre-removed
                     let entry: [String:AnyObject] = [
                         "id": statusEntry.getId(),
                         "timestamp!!timestamp": statusEntry.getTimestamp(),
@@ -123,14 +118,18 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
             
             // Generate random feedback ID
             var rndmHexId: String = ""
-            guard let randomBytes: [UInt8] = PsiphonCommon.getRandomBytes(numBytes: 8) else {
-                throw PsiphonError.Runtime("failed to generate enough random bytes")
-            }
             
-            // Turn randomBytes into array of hexadecimal strings
-            // Join array of strings into single string
-            // http://jamescarroll.xyz/2015/09/09/safely-generating-cryptographically-secure-random-numbers-with-swift/
-            rndmHexId = randomBytes.map({String(format: "%02hhX", $0)}).joined(separator: "")
+            let result: Result<[UInt8]> = PsiphonCommon.getRandomBytes(numBytes: 8)
+            
+            switch result {
+            case let .Value(randomBytes):
+                // Turn randomBytes into array of hexadecimal strings
+                // Join array of strings into single string
+                // http://jamescarroll.xyz/2015/09/09/safely-generating-cryptographically-secure-random-numbers-with-swift/
+                rndmHexId = randomBytes.map({String(format: "%02hhX", $0)}).joined(separator: "")
+            case let .Error(error):
+                throw PsiphonError.Runtime(error)
+            }
             
             feedbackBlob["Metadata"] = [
                 "id": rndmHexId,

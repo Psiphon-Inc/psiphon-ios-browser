@@ -8,14 +8,14 @@
 
 import Foundation
 
-infix operator >>= { associativity left } // Monad's bind
+infix operator >>- { associativity left } // Monad's bind
 infix operator <^>{ associativity left } // Functor's fmap (usually <$>)
 infix operator <*> { associativity left } // Applicative's apply
 
 /**
  infix bind operator
  */
-func >>= <U,T> (
+func >>- <U,T> (
     left: Result<U>,
     right: (U) -> Result<T>) -> Result<T>
 {
