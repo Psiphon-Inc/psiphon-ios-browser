@@ -69,13 +69,16 @@ class PsiphonCommon {
 class PsiphonConfig {
     static let sharedInstance = PsiphonConfig()
     private var config: [String:AnyObject]
+    private var configString: String
     
     private init () {
         config = [:]
-        if let path = Bundle.main.path(forResource: "psiphon_config", ofType: "json")
+        configString = ""
+        if let path = Bundle.main.path(forResource: "psiphon_config", ofType: "")
         {
             do {
                 let jsonData = try NSData(contentsOfFile: path, options: NSData.ReadingOptions.mappedIfSafe)
+                configString = String(data: jsonData as Data, encoding: String.Encoding.utf8)!
                 if let jsonResult: [String:AnyObject] = try JSONSerialization.jsonObject(with: jsonData as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String:AnyObject]
                 {
                     config = jsonResult
@@ -89,6 +92,10 @@ class PsiphonConfig {
     
     public func getField(field: String) -> AnyObject {
         return config[field]!
+    }
+    
+    public func getConfig() -> String {
+        return configString
     }
 }
 

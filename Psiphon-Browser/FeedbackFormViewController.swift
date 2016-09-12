@@ -33,7 +33,6 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
         super.viewDidLoad()
         
         let wkConfig = WKWebViewConfiguration()
-        
         wkConfig.userContentController.add(self, name: "native")
         
         let indexHTMLPath = Bundle.main.path(forResource: "feedback", ofType: "html")
@@ -41,14 +40,16 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
         let request = URLRequest(url: url)
         
         self.webView = WKWebView(frame: self.view.frame, configuration: wkConfig)
-        
         self.webView!.load(request)
-
         self.view = self.webView!
     }
 
     // Received javascript callback with feedback form info
-    // TODO: add comment referencing android code
+    // Form and send feedback blob which conforms to structure
+    // expected by the feedback template for ios,
+    // https://bitbucket.org/psiphon/psiphon-circumvention-system/src/default/EmailResponder/FeedbackDecryptor/templates/?at=default
+    // Matching format used by android client,
+    // https://bitbucket.org/psiphon/psiphon-circumvention-system/src/default/Android/app/src/main/java/com/psiphon3/psiphonlibrary/Diagnostics.java
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         do {
             let dataString: String = message.body as! String
@@ -112,7 +113,6 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
                         "networkTypeName": PsiphonCommon.getNetworkType()
                     ]
                 ]
-                
                 feedbackBlob["DiagnosticInfo"] = diagnosticInfo
             }
             
@@ -138,9 +138,8 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
             ]
             
             // Serialize feedback json
-            let jsonData = try JSONSerialization.data(withJSONObject: feedbackBlob, options: .prettyPrinted)
+            let jsonData = try JSONSerialization.data(withJSONObject: feedbackBlob/*, options: .prettyPrinted*/)
             let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
-            print(jsonString)
             
             sendFeedback(feedbackData: jsonString)
         } catch PsiphonError.Runtime(let error) {
@@ -155,7 +154,15 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
     }
     
     func sendFeedback(feedbackData: String) {
-        // Stubbed for now
+        let pubKey = PsiphonConfig.sharedInstance.getField(field: "FEEDBACK_ENCRYPTION_PUBLIC_KEY") as! String
+        let uploadServer = PsiphonConfig.sharedInstance.getField(field: "FEEDBACK_DIAGNOSTIC_INFO_UPLOAD_SERVER") as! String
+        let uploadPath = PsiphonConfig.sharedInstance.getField(field: "FEEDBACK_DIAGNOSTIC_INFO_UPLOAD_PATH") as! String
+        let uploadServerHeaders = PsiphonConfig.sharedInstance.getField(field: "FEEDBACK_DIAGNOSTIC_INFO_UPLOAD_SERVER_HEADERS") as! String
+            
+        // Async upload
+        DispatchQueue.global().async(execute: {
+            Psi.sendFeedback(PsiphonConfig.sharedInstance.getConfig(), diagnostics: feedbackData, b64EncodedPublicKey: pubKey, uploadServer: uploadServer, uploadPath: uploadPath, uploadServerHeaders: uploadServerHeaders)
+        })
     }
     
     func gatherDeviceInfo() -> Dictionary<String, String> {

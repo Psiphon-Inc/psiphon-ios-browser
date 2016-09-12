@@ -132,7 +132,7 @@ class DiagnosticEntry {
     }
 }
 
-@objc class PsiphonData: NSObject {
+class PsiphonData: NSObject {
  
     private var statusHistory: [StatusEntry] = []
     private var diagnosticHistory: [DiagnosticEntry] = []

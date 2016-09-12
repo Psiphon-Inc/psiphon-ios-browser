@@ -4,3 +4,4 @@
 
 #import "AppDelegate.h"
 #import "PsiphonBrowserViewController.h"
+#import <PsiphonTunnelController/PsiphonTunnelController.h>
