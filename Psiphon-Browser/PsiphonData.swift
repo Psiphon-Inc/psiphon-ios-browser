@@ -46,7 +46,7 @@ class StatusEntry {
         case ASSERT
     }
     
-    private init(id: String, formatArgs: [AnyObject]?, throwable: Throwable?, sensitivity: SensitivityLevel, priority: PriorityLevel) {
+    public init(id: String, formatArgs: [AnyObject]?, throwable: Throwable?, sensitivity: SensitivityLevel, priority: PriorityLevel) {
         Timestamp = Date()
         Id = id
         Sensitivity = sensitivity
@@ -105,8 +105,8 @@ class DiagnosticEntry {
         Data = jsonObject
     }
     
-    private init(msg: String) {
-        let result = DiagnosticEntry.init(msg: msg, nameValuePairs: "msg", msg)
+    public init(msg: String) {
+        let result = DiagnosticEntry(msg: msg, nameValuePairs: "msg" as AnyObject, msg as AnyObject)
         Timestamp = result.Timestamp
         Msg = result.Msg
         Data = result.Data

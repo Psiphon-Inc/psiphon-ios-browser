@@ -93,7 +93,7 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
                 "Survey": [
                     "json": surveyResponse
                 ]
-            ]
+            ] as AnyObject
 
             // If user decides to disclose diagnostics data
             if (sendDiagnosticInfo == true) {
@@ -102,9 +102,9 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
                 
                 for diagnosticEntry in PsiphonData.sharedInstance.getDiagnosticHistory() {
                     let entry: [String:AnyObject] = [
-                        "data": diagnosticEntry.getData(),
-                        "msg": diagnosticEntry.getMsg(),
-                        "timestamp!!timestamp": diagnosticEntry.getTimestamp()
+                        "data": diagnosticEntry.getData() as AnyObject,
+                        "msg": diagnosticEntry.getMsg() as AnyObject,
+                        "timestamp!!timestamp": diagnosticEntry.getTimestamp() as AnyObject
                     ]
                     diagnosticHistoryArray.append(entry)
                 }
@@ -113,11 +113,11 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
                 
                 for statusEntry in PsiphonData.sharedInstance.getStatusHistory() { // Sensitive logs pre-removed
                     let entry: [String:AnyObject] = [
-                        "id": statusEntry.getId(),
-                        "timestamp!!timestamp": statusEntry.getTimestamp(),
-                        "priority": statusEntry.getPriority(),
-                        "formatArgs": valOrNull(opt: statusEntry.getFormatArgs()), // Sensitive format args pre-removed
-                        "throwable": valOrNull(opt: statusEntry.getThrowable() as! AnyObject?)
+                        "id": statusEntry.getId() as AnyObject,
+                        "timestamp!!timestamp": statusEntry.getTimestamp() as AnyObject,
+                        "priority": statusEntry.getPriority() as AnyObject,
+                        "formatArgs": valOrNull(opt: statusEntry.getFormatArgs() as AnyObject?), // Sensitive format args pre-removed
+                        "throwable": valOrNull(opt: statusEntry.getThrowable() as AnyObject?)
                     ]
                     statusHistoryArray.append(entry)
                 }
@@ -137,8 +137,8 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
                         "language": NSLocale.preferredLanguages[0].lowercased(),
                         "networkTypeName": PsiphonCommon.getNetworkType()
                     ]
-                ]
-                feedbackBlob["DiagnosticInfo"] = diagnosticInfo
+                ] as [String:Any]
+                feedbackBlob["DiagnosticInfo"] = diagnosticInfo as AnyObject?
             }
             
             // Generate random feedback ID
@@ -160,7 +160,7 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
                 "id": rndmHexId,
                 "platform": "ios",
                 "version": 1
-            ]
+            ] as AnyObject
             
             let jsonData = try JSONSerialization.data(withJSONObject: feedbackBlob)
             let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
