@@ -27,7 +27,8 @@ class PsiphonCommon {
             return "WIFI"
         }
     }
-    
+
+    // Determine device's network connection status
     // http://stackoverflow.com/questions/25623272/how-to-use-scnetworkreachability-in-swift
     static func getConnectionStatus() -> ConnectionStatus {
         var zeroAddress = sockaddr_in()
@@ -66,6 +67,7 @@ class PsiphonCommon {
     }
 }
 
+/* Singleton parses and provides a view into psiphon config */
 class PsiphonConfig {
     static let sharedInstance = PsiphonConfig()
     private var config: [String:AnyObject]
@@ -90,6 +92,7 @@ class PsiphonConfig {
         }
     }
     
+    // Attempting to access a non-existant field will trigger a crash
     public func getField(field: String) -> AnyObject {
         return config[field]!
     }
@@ -100,6 +103,9 @@ class PsiphonConfig {
 }
 
 extension Notification {
+    // Get userInfo object with key.
+    // Returns result monad.
+    // Value(object) if entry found, otherwise Error.
     func getWithKey<T>(key: String) -> Result<T> {
         if let userInfo = self.userInfo as? Dictionary<String,T> {
             if let entry = userInfo[key] {
@@ -113,9 +119,9 @@ extension Notification {
     }
 }
 
+// ISO8601DateFormatter method only available in iOS 10.0+
+// Follows format specified in `getISO8601String` https://bitbucket.org/psiphon/psiphon-circumvention-system/src/default/Android/app/src/main/java/com/psiphon3/psiphonlibrary/Utils.java#Utils.java-614
 // http://stackoverflow.com/questions/28016578/swift-how-to-create-a-date-time-stamp-and-format-as-iso-8601-rfc-3339-utc-tim
-// ISO8601DateFormatter only available in iOS 10.0+
-// Follow format specified in `getISO8601String` https://bitbucket.org/psiphon/psiphon-circumvention-system/src/default/Android/app/src/main/java/com/psiphon3/psiphonlibrary/Utils.java?fileviewer=file-view-default
 extension Date {
     struct Formatter {
         static let iso8601: DateFormatter = {

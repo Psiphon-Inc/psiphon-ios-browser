@@ -19,6 +19,16 @@ func valOrNull(opt: AnyObject?) -> AnyObject {
     }
 }
 
+struct Feedback {
+    var title: String
+    var question: String
+    var answer: Int
+
+    var description : String {
+        return "[{\"answer\":\(answer),\"question\":\"\(question)\", \"title\":\"\(title)\"}]"
+    }
+}
+
 class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
     @IBOutlet var containerView : UIWebView? = nil
     var webView: WKWebView?
@@ -32,11 +42,12 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Load feedback html into webview
         let wkConfig = WKWebViewConfiguration()
         wkConfig.userContentController.add(self, name: "native")
         
-        let indexHTMLPath = Bundle.main.path(forResource: "feedback", ofType: "html")
-        let url = URL(fileURLWithPath: indexHTMLPath!)
+        let feedbackHTMLPath = Bundle.main.path(forResource: "feedback", ofType: "html")
+        let url = URL(fileURLWithPath: feedbackHTMLPath!)
         let request = URLRequest(url: url)
         
         self.webView = WKWebView(frame: self.view.frame, configuration: wkConfig)
@@ -60,16 +71,30 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
             
             var feedbackBlob: [String:AnyObject] = [:]
             
+            var surveyResponse = ""
+            let responsesArray = (decodedJson["responses"] as! [[String:AnyObject]])
+            
+            // Ensure either feedback or survey response was completed
+            if (responsesArray.count == 0 && (decodedJson["feedback"] as! String).characters.count == 0) {
+                throw PsiphonError.Runtime("Submitted empty feedback")
+            }
+            
+            // Check survey response
+            if (responsesArray.count > 0) {
+                let responses = responsesArray[0]
+                surveyResponse = Feedback(title: responses["title"] as! String, question: responses["question"] as! String, answer: responses["answer"] as! Int).description
+            }
+            
             feedbackBlob["Feedback"] = [
                 "email": decodedJson["email"] as! String,
                 "Message": [
                     "text": decodedJson["feedback"] as! String
                 ],
                 "Survey": [
-                    "json": (decodedJson["responses"] as! [[String:AnyObject]])[0].description
+                    "json": surveyResponse
                 ]
             ]
-            
+
             // If user decides to disclose diagnostics data
             if (sendDiagnosticInfo == true) {
                 
@@ -109,7 +134,7 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
                         ],
                         "isAppStoreBuild": isAppStoreBuild(),
                         "isJailbroken": isJailBroken(),
-                        "language": decodedJson["language"] as! String, // NSLocale.preferredLanguages[0].lowercased(), // TODO: Is this right "en-CA" desired "en"?
+                        "language": NSLocale.preferredLanguages[0].lowercased(),
                         "networkTypeName": PsiphonCommon.getNetworkType()
                     ]
                 ]
@@ -137,8 +162,7 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
                 "version": 1
             ]
             
-            // Serialize feedback json
-            let jsonData = try JSONSerialization.data(withJSONObject: feedbackBlob/*, options: .prettyPrinted*/)
+            let jsonData = try JSONSerialization.data(withJSONObject: feedbackBlob)
             let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
             
             sendFeedback(feedbackData: jsonString)
@@ -187,7 +211,6 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
             userInterfaceIdiomString = "carPlay"
         }
 
-        //deviceInfo["name"] = device.name
         deviceInfo["systemName"] = device.systemName
         deviceInfo["systemVersion"] = device.systemVersion
         deviceInfo["model"] = device.model

@@ -55,6 +55,7 @@ class StatusEntry {
         Priority = priority
     }
     
+    // Return format args if they are not sensitive
     public func getFormatArgs() -> [AnyObject]? {
         if (self.getSensitivity() == StatusEntry.SensitivityLevel.SENSITIVE_FORMAT_ARGS) {
             return []
@@ -85,7 +86,6 @@ class StatusEntry {
 }
 
 class DiagnosticEntry {
-    
     private var Timestamp: Date
     private var Msg: String
     private var Data: [String:AnyObject]
@@ -189,6 +189,7 @@ class PsiphonData: NSObject {
         return self.diagnosticHistory
     }
     
+    // Get last `n` diagnostic logs for display
     func getDiagnosticLogs(n: Int? = nil) -> [String] {
         var entries: [DiagnosticEntry] = []
         
@@ -200,6 +201,7 @@ class PsiphonData: NSObject {
         return entries.map { ( $0 ).getTimestampForDisplay() + " " + ( $0 ).getMsg() } // map to string array of formatted entries for display
     }
     
+    // Return status history with sensitive logs removed
     func getStatusHistory() -> [StatusEntry] {
         return self.statusHistory.filter { ($0).getSensitivity() != StatusEntry.SensitivityLevel.SENSITIVE_LOG }
     }
