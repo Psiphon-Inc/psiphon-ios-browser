@@ -29,7 +29,7 @@ struct Feedback {
     }
 }
 
-class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
+class FeedbackFormViewController: UIViewController, WKScriptMessageHandler, WKNavigationDelegate {
     @IBOutlet var containerView : UIWebView? = nil
     var webView: WKWebView?
     
@@ -47,14 +47,33 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler {
         wkConfig.userContentController.add(self, name: "native")
         
         let feedbackHTMLPath = Bundle.main.path(forResource: "feedback", ofType: "html")
-        let url = URL(fileURLWithPath: feedbackHTMLPath!)
-        let request = URLRequest(url: url)
+        let htmlUrl = URL(fileURLWithPath: feedbackHTMLPath!)
         
+        let args = "?{\"faqURL\":\"\(PsiphonConfig.sharedInstance.getField(field: "FAQ_URL"))\",\"dataCollectionInfoURL\":\"\(PsiphonConfig.sharedInstance.getField(field: "DATA_COLLECTION_INFO_URL"))\"}"
+        
+        let url = URL(dataRepresentation: args.data(using: .utf8)!, relativeTo: htmlUrl)!
+        let request = URLRequest(url: url)
+
         self.webView = WKWebView(frame: self.view.frame, configuration: wkConfig)
+        self.webView?.navigationDelegate = self
         self.webView!.load(request)
         self.view = self.webView!
     }
 
+    // Open links in Safari instead of webview
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if navigationAction.navigationType == .linkActivated  {
+            if let newURL = navigationAction.request.url {
+                if newURL.absoluteString.contains("https://") && UIApplication.shared.canOpenURL(newURL) && UIApplication.shared.openURL(newURL) {
+                    decisionHandler(.cancel)
+                    return
+                }
+            }
+        }
+        // Not a user interaction
+        decisionHandler(.allow)
+    }
+    
     // Received javascript callback with feedback form info
     // Form and send feedback blob which conforms to structure
     // expected by the feedback template for ios,
