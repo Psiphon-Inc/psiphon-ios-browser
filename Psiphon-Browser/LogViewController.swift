@@ -37,7 +37,7 @@ class LogViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func receivedUpdateLogsNotification(aNotification: Notification) {
-        displayedLogs = PsiphonData.sharedInstance.getDiagnosticLogs(n:10)
+        displayedLogs = PsiphonData.sharedInstance.getDiagnosticLogs()
         tableView.reloadData()
         scrollToBottom()
     }
