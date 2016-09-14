@@ -41,8 +41,11 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler, WKNa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Load feedback html into webview
+        loadFeedbackForm()
+    }
+
+    // Load feedback html into webview
+    func loadFeedbackForm() {
         let wkConfig = WKWebViewConfiguration()
         wkConfig.userContentController.add(self, name: "native")
         
@@ -63,15 +66,18 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler, WKNa
         self.view = self.webView!
     }
 
-    // Open links in Safari instead of webview
+    // Open links in Browser instead of webview
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.navigationType == .linkActivated  {
-            if let newURL = navigationAction.request.url {
-                if newURL.absoluteString.contains("https://") && UIApplication.shared.canOpenURL(newURL) && UIApplication.shared.openURL(newURL) {
-                    decisionHandler(.cancel)
-                    return
-                }
-            }
+            let url = navigationAction.request.url
+            let pageToLoad = url?.absoluteString
+
+            let browserVC = PsiphonBrowserViewController()
+            let navCntrl = UINavigationController.init(rootViewController: browserVC)
+            navCntrl.navigationBar.isHidden = true
+
+            self.present(navCntrl, animated: true, completion: { browserVC.addTab(withAddress: pageToLoad) })
+            decisionHandler(.cancel)
         }
         // Not a user interaction
         decisionHandler(.allow)
