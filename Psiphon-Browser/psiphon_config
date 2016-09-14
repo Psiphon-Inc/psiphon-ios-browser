@@ -13,5 +13,11 @@
     "ConnectionWorkerPoolSize" : 10,
     "TunnelPoolSize" : 1,
     "PortForwardFailureThreshold" : 10,
-    "UpstreamProxyUrl" : ""
+    "UpstreamProxyUrl" : "",
+    "FEEDBACK_ENCRYPTION_PUBLIC_KEY": "",
+    "FEEDBACK_DIAGNOSTIC_INFO_UPLOAD_SERVER" : "",
+    "FEEDBACK_DIAGNOSTIC_INFO_UPLOAD_PATH" : "",
+    "FEEDBACK_DIAGNOSTIC_INFO_UPLOAD_SERVER_HEADERS" : "",
+    "FAQ_URL" : "https://s3.amazonaws.com/invalid_bucket_name/en/faq.html",
+    "DATA_COLLECTION_INFO_URL" : "https://s3.amazonaws.com/invalid_bucket_name/en/faq.html#information-collected"
 }

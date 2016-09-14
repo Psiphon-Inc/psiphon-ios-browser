@@ -49,7 +49,10 @@ class FeedbackFormViewController: UIViewController, WKScriptMessageHandler, WKNa
         let feedbackHTMLPath = Bundle.main.path(forResource: "feedback", ofType: "html")
         let htmlUrl = URL(fileURLWithPath: feedbackHTMLPath!)
         
-        let args = "?{\"faqURL\":\"\(PsiphonConfig.sharedInstance.getField(field: "FAQ_URL"))\",\"dataCollectionInfoURL\":\"\(PsiphonConfig.sharedInstance.getField(field: "DATA_COLLECTION_INFO_URL"))\"}#" + NSLocale.preferredLanguages[0].lowercased().components(separatedBy: "-")[0]
+        let faqURL = (PsiphonConfig.sharedInstance.getField(field: "FAQ_URL") as! String).addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        let dataCollectionInfoURL = (PsiphonConfig.sharedInstance.getField(field: "DATA_COLLECTION_INFO_URL") as! String).addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        
+        let args = "?{\"faqURL\":\"\(faqURL)\",\"dataCollectionInfoURL\":\"\(dataCollectionInfoURL)\"}#" + NSLocale.preferredLanguages[0].lowercased().components(separatedBy: "-")[0]
         
         let url = URL(dataRepresentation: args.data(using: .utf8)!, relativeTo: htmlUrl)!
         let request = URLRequest(url: url)

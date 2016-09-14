@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		443FE8F51D6F770B0086DC29 /* psiphon_config in Resources */ = {isa = PBXBuildFile; fileRef = 443FE8F41D6F770B0086DC29 /* psiphon_config */; };
-		447615EF1C73ABA50015077B /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 447615EE1C73ABA50015077B /* LogViewController.m */; };
 		449BE2041C57D402006FDC28 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449BE2031C57D402006FDC28 /* CoreData.framework */; };
 		449BE2061C57D40C006FDC28 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449BE2051C57D40C006FDC28 /* SystemConfiguration.framework */; };
 		449BE2081C57D41E006FDC28 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 449BE2071C57D41E006FDC28 /* libxml2.2.tbd */; };
@@ -62,7 +61,6 @@
 		44B0A2121C568BD20064D364 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44B0A2111C568BD20064D364 /* Assets.xcassets */; };
 		44B0A2151C568BD20064D364 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44B0A2131C568BD20064D364 /* LaunchScreen.storyboard */; };
 		44F5561A1C6D01040038D33A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F556191C6D01040038D33A /* CoreTelephony.framework */; };
-		4E0490631D80C78900C5EFB6 /* PsiphonTunnelController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E0490601D80C78600C5EFB6 /* PsiphonTunnelController.framework */; };
 		4E0490691D8701E100C5EFB6 /* PsiphonTunnelController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E0490681D8701E100C5EFB6 /* PsiphonTunnelController.framework */; };
 		4E34EA261D6F48EE00367FCE /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E34EA251D6F48EE00367FCE /* LogViewController.swift */; };
 		4E4ABF591D6F833B004BF29F /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4ABF581D6F833B004BF29F /* FeedbackViewController.swift */; };
@@ -96,9 +94,6 @@
 
 /* Begin PBXFileReference section */
 		443FE8F41D6F770B0086DC29 /* psiphon_config */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = psiphon_config; sourceTree = "<group>"; };
-		447615ED1C73ABA50015077B /* LogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
-		447615EE1C73ABA50015077B /* LogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
-		44980AD81D63ACA600B78274 /* PsiphonTunnelController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PsiphonTunnelController.framework; sourceTree = SOURCE_ROOT; };
 		449BE1FA1C569843006FDC28 /* Psiphon.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Psiphon.pch; sourceTree = "<group>"; };
 		449BE2031C57D402006FDC28 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		449BE2051C57D40C006FDC28 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -172,7 +167,6 @@
 		44B0A2141C568BD20064D364 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		44B0A2161C568BD20064D364 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		44F556191C6D01040038D33A /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		4E0490601D80C78600C5EFB6 /* PsiphonTunnelController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PsiphonTunnelController.framework; path = "/Users/miro/psiphon-ios-browser/PsiphonTunnelController.framework"; sourceTree = "<absolute>"; };
 		4E0490681D8701E100C5EFB6 /* PsiphonTunnelController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PsiphonTunnelController.framework; sourceTree = SOURCE_ROOT; };
 		4E34EA251D6F48EE00367FCE /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		4E4ABF581D6F833B004BF29F /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
@@ -195,7 +189,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EB29F3B1D87053D003D300C /* PsiphonTunnelController.framework in Frameworks */,
-				4E0490631D80C78900C5EFB6 /* PsiphonTunnelController.framework in Frameworks */,
 				44F5561A1C6D01040038D33A /* CoreTelephony.framework in Frameworks */,
 				4E0490691D8701E100C5EFB6 /* PsiphonTunnelController.framework in Frameworks */,
 				449BE2081C57D41E006FDC28 /* libxml2.2.tbd in Frameworks */,
